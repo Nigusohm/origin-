@@ -1,0 +1,549 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Corporate Branding Palette */
+    --oe-obsidian: #080A0F;
+    --oe-carbon: #111318;
+    --oe-gold: #C8961E;
+    --oe-silver: #8A9AAF;
+    --oe-ivory: #F4F1EC;
+    --oe-fog: #E2DDD6;
+
+    /* Division 1 — B-VIBE Garment */
+    --bvibe-ink: #0A0A0A;
+    --bvibe-ember: #C84B1A;
+    --bvibe-sand: #D4B896;
+    --bvibe-linen: #F5EEE4;
+
+    /* Division 2 — Tx Digital */
+    --tx-void: #060810;
+    --tx-electric: #2563EB;
+    --tx-neon: #06D6A0;
+    --tx-chalk: #F8FAFC;
+
+    /* Division 3 — Strategic Consulting */
+    --con-deep: #0C1420;
+    --con-slate: #1E3A5F;
+    --con-gold: #C8961E;
+    --con-paper: #F0EDE8;
+
+    /* Default Dark Mode Theme Tokens */
+    --bg-main: var(--oe-obsidian);
+    --bg-card: var(--oe-carbon);
+    --bg-card-hover: #161B26;
+    --bg-input: #080A0F;
+    --text-primary: var(--oe-ivory);
+    --text-muted: var(--oe-silver);
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --accent-gold: #C8961E;
+    --accent-ember: #C84B1A;
+    --accent-electric: #2563EB;
+  }
+
+  /* Light Mode Theme Tokens */
+  :root.light-mode {
+    --bg-main: #F8FAFC;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #F1F5F9;
+    --bg-input: #FFFFFF;
+    --text-primary: #0F172A;
+    --text-muted: #475569;
+    --border-subtle: #E2E8F0;
+    --accent-gold: #9A6F00;
+    --accent-ember: #B83E10;
+    --accent-electric: #1D4ED8;
+  }
+
+  *, *::before, *::after {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, fill 0.3s ease-in-out, stroke 0.3s ease-in-out;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text-primary);
+    background-color: var(--bg-main);
+    overflow-x: hidden;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+
+  .font-cormorant {
+    font-family: 'Cormorant', serif;
+  }
+
+  .font-jakarta {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .font-mono-code {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .font-amharic {
+    font-family: 'Noto Serif Ethiopic', serif;
+  }
+}
+
+/* -------------------------------------------------------------
+ * LIGHT MODE COMPREHENSIVE OVERRIDES FOR COLOR CONSISTENCY
+ * ------------------------------------------------------------- */
+:root.light-mode body {
+  background-color: #FAF8F5 !important;
+  color: #0F172A !important;
+}
+
+/* 1. CORPORATE DIVISION LIGHT MODE (Ivory & Gold) */
+:root.light-mode [data-division="corporate"] {
+  background-color: #FAF8F5 !important;
+  color: #0F172A !important;
+}
+
+:root.light-mode [data-division="corporate"] main,
+:root.light-mode [data-division="corporate"] .bg-\[\#080A0F\],
+:root.light-mode [data-division="corporate"] .bg-\[\#0A0A0A\] {
+  background-color: #FAF8F5 !important;
+  color: #0F172A !important;
+}
+
+:root.light-mode [data-division="corporate"] .bg-\[\#111318\],
+:root.light-mode [data-division="corporate"] .bg-\[\#161B26\] {
+  background-color: #FFFFFF !important;
+  border-color: #EAE3D9 !important;
+  box-shadow: 0 4px 18px -2px rgba(154, 111, 0, 0.05);
+}
+
+/* 2. B-VIBE GARMENT MANUFACTURING LIGHT MODE (Linen Cotton & Terracotta Rust) */
+:root.light-mode [data-division="bvibe"] {
+  background-color: #FFFBF7 !important;
+  color: #1C1917 !important;
+}
+
+:root.light-mode [data-division="bvibe"] main,
+:root.light-mode [data-division="bvibe"] .bg-\[\#0A0A0A\],
+:root.light-mode [data-division="bvibe"] .bg-\[\#080A0F\] {
+  background-color: #FFFBF7 !important;
+  color: #1C1917 !important;
+}
+
+:root.light-mode [data-division="bvibe"] section.bg-gradient-to-b,
+:root.light-mode [data-division="bvibe"] .from-\[\#0A0A0A\] {
+  background: linear-gradient(180deg, #FFFBF7 0%, #FFF2EB 50%, #FFFBF7 100%) !important;
+}
+
+:root.light-mode [data-division="bvibe"] .bg-\[\#111318\],
+:root.light-mode [data-division="bvibe"] .bg-\[\#1A1A1A\],
+:root.light-mode [data-division="bvibe"] .bg-\[\#0A0A0A\] {
+  background-color: #FFFFFF !important;
+  border-color: #F0E2D6 !important;
+  box-shadow: 0 4px 18px -2px rgba(184, 62, 16, 0.06);
+}
+
+:root.light-mode [data-division="bvibe"] .text-\[\#C84B1A\] {
+  color: #B83E10 !important;
+}
+
+:root.light-mode [data-division="bvibe"] .text-\[\#D4B896\] {
+  color: #785A28 !important;
+}
+
+:root.light-mode [data-division="bvibe"] .text-\[\#F5EEE4\],
+:root.light-mode [data-division="bvibe"] .text-\[\#F4F1EC\] {
+  color: #1C1917 !important;
+}
+
+:root.light-mode [data-division="bvibe"] .border-\[\#C84B1A\]\/30,
+:root.light-mode [data-division="bvibe"] .border-\[\#C84B1A\]\/40 {
+  border-color: rgba(184, 62, 16, 0.35) !important;
+}
+
+:root.light-mode [data-division="bvibe"] .bg-\[\#C84B1A\] {
+  background-color: #B83E10 !important;
+  color: #FFFFFF !important;
+}
+
+:root.light-mode [data-division="bvibe"] .bg-\[\#C84B1A\]\/20,
+:root.light-mode [data-division="bvibe"] .bg-\[\#C84B1A\]\/15 {
+  background-color: #FFF0EB !important;
+}
+
+/* 3. Tˣ DIGITAL AGENCY LIGHT MODE (Tech Blue Ice & Royal Blue) */
+:root.light-mode [data-division="tx"] {
+  background-color: #F0F7FF !important;
+  color: #0F172A !important;
+}
+
+:root.light-mode [data-division="tx"] main,
+:root.light-mode [data-division="tx"] .bg-\[\#060810\],
+:root.light-mode [data-division="tx"] .bg-\[\#080A0F\] {
+  background-color: #F0F7FF !important;
+  color: #0F172A !important;
+}
+
+:root.light-mode [data-division="tx"] section.bg-gradient-to-b,
+:root.light-mode [data-division="tx"] .from-\[\#060810\] {
+  background: linear-gradient(180deg, #F0F7FF 0%, #E0F2FE 50%, #F0F7FF 100%) !important;
+}
+
+:root.light-mode [data-division="tx"] .bg-\[\#0D1322\],
+:root.light-mode [data-division="tx"] .bg-\[\#111318\],
+:root.light-mode [data-division="tx"] .bg-\[\#161F33\] {
+  background-color: #FFFFFF !important;
+  border-color: #BFDBFE !important;
+  box-shadow: 0 4px 18px -2px rgba(37, 99, 235, 0.08);
+}
+
+:root.light-mode [data-division="tx"] .text-\[\#2563EB\] {
+  color: #1D4ED8 !important;
+}
+
+:root.light-mode [data-division="tx"] .text-\[\#06D6A0\] {
+  color: #047857 !important;
+}
+
+:root.light-mode [data-division="tx"] .text-\[\#F8FAFC\] {
+  color: #0F172A !important;
+}
+
+:root.light-mode [data-division="tx"] .border-\[\#2563EB\]\/30,
+:root.light-mode [data-division="tx"] .border-\[\#2563EB\]\/40 {
+  border-color: rgba(29, 78, 216, 0.35) !important;
+}
+
+:root.light-mode [data-division="tx"] .bg-\[\#2563EB\] {
+  background-color: #1D4ED8 !important;
+  color: #FFFFFF !important;
+}
+
+:root.light-mode [data-division="tx"] .bg-\[\#2563EB\]\/20,
+:root.light-mode [data-division="tx"] .bg-\[\#2563EB\]\/15 {
+  background-color: #EFF6FF !important;
+}
+
+/* 4. STRATEGIC CONSULTING LIGHT MODE (Executive Paper & Navy/Gold) */
+:root.light-mode [data-division="consulting"] {
+  background-color: #F4F6F9 !important;
+  color: #0F172A !important;
+}
+
+:root.light-mode [data-division="consulting"] main,
+:root.light-mode [data-division="consulting"] .bg-\[\#080A0F\],
+:root.light-mode [data-division="consulting"] .bg-\[\#0C1420\] {
+  background-color: #F4F6F9 !important;
+  color: #0F172A !important;
+}
+
+:root.light-mode [data-division="consulting"] section.bg-gradient-to-b,
+:root.light-mode [data-division="consulting"] .from-\[\#080A0F\] {
+  background: linear-gradient(180deg, #F4F6F9 0%, #EBF0F6 50%, #F4F6F9 100%) !important;
+}
+
+:root.light-mode [data-division="consulting"] .bg-\[\#111318\],
+:root.light-mode [data-division="consulting"] .bg-\[\#1E3A5F\],
+:root.light-mode [data-division="consulting"] .bg-\[\#0C1420\] {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  box-shadow: 0 4px 18px -2px rgba(15, 23, 42, 0.06);
+}
+
+:root.light-mode [data-division="consulting"] .text-\[\#C8961E\] {
+  color: #9A6F00 !important;
+}
+
+:root.light-mode [data-division="consulting"] .text-\[\#F0EDE8\],
+:root.light-mode [data-division="consulting"] .text-\[\#F4F1EC\] {
+  color: #0F172A !important;
+}
+
+:root.light-mode [data-division="consulting"] .border-\[\#C8961E\]\/30,
+:root.light-mode [data-division="consulting"] .border-\[\#C8961E\]\/40 {
+  border-color: rgba(154, 111, 0, 0.35) !important;
+}
+
+:root.light-mode [data-division="consulting"] .bg-\[\#C8961E\] {
+  background-color: #9A6F00 !important;
+  color: #FFFFFF !important;
+}
+
+:root.light-mode [data-division="consulting"] .bg-\[\#C8961E\]\/20,
+:root.light-mode [data-division="consulting"] .bg-\[\#C8961E\]\/15 {
+  background-color: #FFF9EB !important;
+}
+
+/* Navigation & Footer Shared Light Overrides */
+:root.light-mode header {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+:root.light-mode header nav {
+  background-color: #F1F5F9 !important;
+  border-color: #CBD5E1 !important;
+}
+
+:root.light-mode header nav a {
+  color: #475569 !important;
+}
+
+:root.light-mode header nav a:hover {
+  color: #0F172A !important;
+}
+
+/* Active Division Nav Tabs in Light Mode */
+:root.light-mode header nav a.bg-\[\#C8961E\] {
+  background-color: #C8961E !important;
+  color: #080A0F !important;
+  font-weight: 700 !important;
+}
+
+:root.light-mode header nav a.bg-\[\#C84B1A\] {
+  background-color: #C84B1A !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+:root.light-mode header nav a.bg-\[\#2563EB\] {
+  background-color: #2563EB !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+:root.light-mode header nav a.bg-\[\#1E3A5F\] {
+  background-color: #0C1420 !important;
+  color: #FFFFFF !important;
+  border-color: #C8961E !important;
+  font-weight: 700 !important;
+}
+
+:root.light-mode header nav a.bg-\[\#1E3A5F\] * {
+  color: #C8961E !important;
+}
+
+:root.light-mode header nav a.bg-\[\#06D6A0\] {
+  background-color: #06D6A0 !important;
+  color: #080A0F !important;
+  font-weight: 700 !important;
+}
+
+:root.light-mode footer {
+  background-color: #F1F5F9 !important;
+  border-color: #E2E8F0 !important;
+  color: #475569 !important;
+}
+
+:root.light-mode footer .text-\[\#F4F1EC\] {
+  color: #0F172A !important;
+}
+
+/* Universal Text & Muted Controls for Light Mode */
+:root.light-mode .bg-\[\#080A0F\],
+:root.light-mode .bg-\[\#080A0F\]\/95,
+:root.light-mode .bg-\[\#080A0F\]\/90,
+:root.light-mode .bg-\[\#080A0F\]\/80,
+:root.light-mode .bg-\[\#080A0F\]\/60,
+:root.light-mode .bg-\[\#080A0F\]\/40,
+:root.light-mode .bg-\[\#080A0F\]\/20,
+:root.light-mode .bg-\[\#0A0A0A\],
+:root.light-mode .bg-\[\#0A0A0A\]\/95,
+:root.light-mode .bg-\[\#0A0A0A\]\/90,
+:root.light-mode .bg-\[\#0A0A0A\]\/80,
+:root.light-mode .bg-\[\#0A0A0A\]\/60,
+:root.light-mode .bg-\[\#060810\],
+:root.light-mode .bg-\[\#060810\]\/95,
+:root.light-mode .bg-\[\#060810\]\/90,
+:root.light-mode .bg-\[\#060810\]\/80,
+:root.light-mode .bg-\[\#0C1420\],
+:root.light-mode .bg-\[\#0C1420\]\/95,
+:root.light-mode .bg-\[\#0C1420\]\/90,
+:root.light-mode .bg-\[\#0C1420\]\/80,
+:root.light-mode .bg-\[\#0C1420\]\/60,
+:root.light-mode .bg-\[\#0C1420\]\/40 {
+  background-color: #FAF8F5 !important;
+  color: #0F172A !important;
+}
+
+:root.light-mode .bg-\[\#111318\],
+:root.light-mode .bg-\[\#111318\]\/95,
+:root.light-mode .bg-\[\#111318\]\/90,
+:root.light-mode .bg-\[\#111318\]\/80,
+:root.light-mode .bg-\[\#111318\]\/60,
+:root.light-mode .bg-\[\#111318\]\/50,
+:root.light-mode .bg-\[\#111318\]\/40,
+:root.light-mode .bg-\[\#111318\]\/30,
+:root.light-mode .bg-\[\#1A1A1A\],
+:root.light-mode .bg-\[\#0D1322\],
+:root.light-mode .bg-\[\#161B26\],
+:root.light-mode .bg-\[\#161F33\] {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+:root.light-mode .text-\[\#F4F1EC\],
+:root.light-mode .text-\[\#F5EEE4\],
+:root.light-mode .text-\[\#F8FAFC\],
+:root.light-mode .text-\[\#E2DDD6\] {
+  color: #0F172A !important;
+}
+
+/* Ensure white text inside buttons, pills, and dark image containers remains white in light mode */
+:root.light-mode button .text-white,
+:root.light-mode button.text-white,
+:root.light-mode .bg-\[\#C84B1A\] .text-white,
+:root.light-mode .bg-\[\#C84B1A\].text-white,
+:root.light-mode .bg-\[\#2563EB\] .text-white,
+:root.light-mode .bg-\[\#2563EB\].text-white,
+:root.light-mode .bg-\[\#1D4ED8\] .text-white,
+:root.light-mode .bg-\[\#1D4ED8\].text-white,
+:root.light-mode .bg-\[\#C8961E\] .text-white,
+:root.light-mode .bg-\[\#C8961E\].text-white,
+:root.light-mode .bg-black .text-white,
+:root.light-mode .bg-slate-950 .text-white {
+  color: #FFFFFF !important;
+}
+
+:root.light-mode .text-\[\#8A9AAF\],
+:root.light-mode .text-white\/70,
+:root.light-mode .text-white\/80,
+:root.light-mode .text-white\/60 {
+  color: #475569 !important;
+}
+
+:root.light-mode input,
+:root.light-mode textarea,
+:root.light-mode select {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+:root.light-mode input::placeholder,
+:root.light-mode textarea::placeholder {
+  color: #94A3B8 !important;
+}
+
+:root.light-mode .border-white\/5,
+:root.light-mode .border-white\/10,
+:root.light-mode .border-white\/15,
+:root.light-mode .border-white\/20,
+:root.light-mode .border-white\/30,
+:root.light-mode .border-white\/40 {
+  border-color: #E2E8F0 !important;
+}
+
+:root.light-mode .bg-white\/5,
+:root.light-mode .bg-white\/10,
+:root.light-mode .bg-white\/15,
+:root.light-mode .bg-white\/20 {
+  background-color: rgba(15, 23, 42, 0.04) !important;
+  border-color: #E2E8F0 !important;
+}
+
+:root.light-mode .bg-black\/80 {
+  background-color: rgba(15, 23, 42, 0.6) !important;
+}
+
+:root.light-mode .from-\[\#080A0F\],
+:root.light-mode .from-\[\#0A0A0A\],
+:root.light-mode .from-\[\#060810\],
+:root.light-mode .from-\[\#0C1420\],
+:root.light-mode .from-\[\#111318\] {
+  --tw-gradient-from: #FAF8F5 var(--tw-gradient-from-position, ) !important;
+}
+
+:root.light-mode .to-\[\#080A0F\],
+:root.light-mode .to-\[\#0A0A0A\],
+:root.light-mode .to-\[\#060810\],
+:root.light-mode .to-\[\#0C1420\],
+:root.light-mode .to-\[\#111318\] {
+  --tw-gradient-to: #FAF8F5 var(--tw-gradient-to-position, ) !important;
+}
+
+/* Custom Scrollbars in Light Mode */
+:root.light-mode ::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+:root.light-mode ::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+:root.light-mode ::-webkit-scrollbar-thumb:hover {
+  background: #9A6F00;
+}
+
+/* Dynamic Division Theme Attributes */
+[data-division="bvibe"] {
+  --theme-bg-dark: var(--bvibe-ink);
+  --theme-bg-light: var(--bvibe-linen);
+  --theme-primary: var(--bvibe-ember);
+  --theme-accent: var(--bvibe-sand);
+}
+
+[data-division="tx"] {
+  --theme-bg-dark: var(--tx-void);
+  --theme-bg-light: var(--tx-chalk);
+  --theme-primary: var(--tx-electric);
+  --theme-accent: var(--tx-neon);
+}
+
+[data-division="consulting"] {
+  --theme-bg-dark: var(--con-deep);
+  --theme-bg-light: var(--con-paper);
+  --theme-primary: var(--con-slate);
+  --theme-accent: var(--con-gold);
+}
+
+/* Signature Element 2: Tx Cursor Blink */
+.tx-cursor-blink {
+  border-right: 2px solid #2563EB;
+  animation: txBlink 1s step-end infinite;
+}
+
+@keyframes txBlink {
+  from, to { border-color: transparent }
+  50% { border-color: #2563EB }
+}
+
+/* Signature Element 3: Consulting Document Fold */
+.doc-fold-corner {
+  position: relative;
+}
+.doc-fold-corner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-style: solid;
+  border-width: 0 18px 18px 0;
+  border-color: transparent #C8961E transparent transparent;
+  opacity: 0.85;
+}
+
+/* Custom Scrollbars Default */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #080A0F;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E2638;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C8961E;
+}
+
+/* Floating animation for particles */
+@keyframes floatParticle {
+  0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; }
+  50% { transform: translateY(-25px) scale(1.3); opacity: 0.8; }
+}
+
+.animate-float-particle {
+  animation: floatParticle 8s ease-in-out infinite;
+}
+
+
