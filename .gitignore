@@ -45,4 +45,7 @@ Thumbs.db
 
 # IDE
 .vscode/
-.idea/
+.idea/tmp/
+node_modules/
+node_modules
+tmp/

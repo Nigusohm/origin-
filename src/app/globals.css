@@ -1,9 +1,6 @@
-@import "tailwindcss";
-
-/* Make Tailwind's dark: utilities follow the application's theme toggle,
-   rather than the operating-system colour preference. */
-@custom-variant dark (&:where(.dark, .dark *));
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @layer base {
   :root {
     /* Corporate Branding Palette */

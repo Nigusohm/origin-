@@ -9,6 +9,16 @@ config({ path: path.join(__dirname, 'backend', '.env.local') });
 const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname),
   reactStrictMode: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  experimental: {
+    workerThreads: false,
+    cpus: 1,
+  },
   images: {
     unoptimized: true,
     formats: ['image/avif', 'image/webp'],

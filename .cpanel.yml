@@ -1,0 +1,9 @@
+---
+deployment:
+  tasks:
+    - export NODE_ENV=production
+    - source /home/originev/nodevenv/repositories/origin-/20/bin/activate
+    - cd /home/originev/repositories/origin-
+    - npm install
+    - mkdir -p tmp
+    - touch tmp/restart.txt
