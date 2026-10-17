@@ -5,8 +5,8 @@ import { initialResources } from '@/data/mockData';
 
 async function fetchResources(): Promise<Resource[]> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/resources`, { cache: 'no-store' });
+    const baseUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/api/resources`, { cache: 'no-store', signal: AbortSignal.timeout(10_000) });
     if (!res.ok) return initialResources;
     const data = await res.json();
     return Array.isArray(data) ? data : initialResources;

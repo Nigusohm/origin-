@@ -1,8 +1,15 @@
-const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:4000';
+const DEFAULT_BACKEND = 'http://localhost:4000';
+
+export function getBackendBaseUrl(): string {
+  const raw = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BASE_URL || DEFAULT_BACKEND;
+  return raw.replace(/\/+$/, '');
+}
 
 export async function proxyToBackend(request: Request, backendPath: string) {
+  const backendBase = (process.env.BACKEND_URL || DEFAULT_BACKEND).replace(/\/+$/, '');
+  const cleanPath = backendPath.startsWith('/') ? backendPath : `/${backendPath}`;
   const url = new URL(request.url);
-  const target = `${BACKEND_URL}${backendPath}${url.search}`;
+  const target = `${backendBase}${cleanPath}${url.search}`;
 
   const headers: Record<string, string> = {};
 
@@ -39,11 +46,19 @@ export async function proxyToBackend(request: Request, backendPath: string) {
     });
 
     const resBuffer = await res.arrayBuffer();
+    const responseHeaders = new Headers();
+    res.headers.forEach((val, key) => {
+      if (!['transfer-encoding', 'connection'].includes(key.toLowerCase())) {
+        responseHeaders.set(key, val);
+      }
+    });
+    if (!responseHeaders.has('content-type')) {
+      responseHeaders.set('content-type', 'application/json');
+    }
+
     return new Response(resBuffer, {
       status: res.status,
-      headers: {
-        'Content-Type': res.headers.get('Content-Type') ?? 'application/json',
-      },
+      headers: responseHeaders,
     });
   } catch (err: any) {
     console.error(`[backend-proxy] Failed to reach ${target}:`, err.message);
