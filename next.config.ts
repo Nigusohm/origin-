@@ -1,13 +1,8 @@
 import type { NextConfig } from 'next';
+import type { Configuration } from 'webpack';
 import path from 'path';
-import { config } from 'dotenv';
-
-// Keep provider credentials outside the repository root while allowing Next's
-// route handlers to use the backend configuration during local development.
-config({ path: path.join(__dirname, 'backend', '.env.local') });
 
 const nextConfig: NextConfig = {
-  outputFileTracingRoot: path.join(__dirname),
   reactStrictMode: true,
   typescript: {
     ignoreBuildErrors: true,
@@ -18,6 +13,13 @@ const nextConfig: NextConfig = {
   experimental: {
     workerThreads: false,
     cpus: 1,
+  },
+  webpack(config: Configuration) {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(process.cwd(), 'src'),
+    };
+    return config;
   },
   images: {
     unoptimized: true,

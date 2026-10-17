@@ -1,12 +1,11 @@
-import { createServer } from 'http';
-import { parse } from 'url';
-import next from 'next';
-import path from 'path';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
+'use strict';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dir = path.dirname(__filename);
+const { createServer } = require('http');
+const { parse } = require('url');
+const path = require('path');
+const fs = require('fs');
+
+const __dir = __dirname;
 
 const logFile = path.join(__dir, 'debug.log');
 function log(msg) {
@@ -20,10 +19,26 @@ log('NODE_ENV: ' + (process.env.NODE_ENV || 'not set'));
 
 process.env.NODE_ENV = 'production';
 
-const app = next({ dev: false, dir: __dir });
-const handle = app.getRequestHandler();
+// Dynamically import next (ESM package) from CommonJS
+async function main() {
+  let next;
+  try {
+    next = (await import('next')).default;
+  } catch (e) {
+    log('Failed to import next: ' + (e.stack || e.message));
+    process.exit(1);
+  }
 
-app.prepare().then(function () {
+  const app = next({ dev: false, dir: __dir });
+  const handle = app.getRequestHandler();
+
+  try {
+    await app.prepare();
+  } catch (err) {
+    log('FATAL: app.prepare() failed: ' + (err.stack || err.message));
+    process.exit(1);
+  }
+
   const bindTarget = process.env.PORT || 3000;
   log('Binding to: ' + bindTarget);
 
@@ -31,10 +46,13 @@ app.prepare().then(function () {
     const parsedUrl = parse(req.url, true);
     handle(req, res, parsedUrl);
   }).listen(bindTarget, function () {
-    log('Next.js production server ready on ' + bindTarget);
+    log('Next.js production server ready on port ' + bindTarget);
   });
+}
 
-}).catch(function (err) {
-  log('FATAL BOOT ERROR: ' + (err.stack || err.message));
-  throw err;
+main().catch(function (err) {
+  const line = '[' + new Date().toISOString() + '] FATAL BOOT ERROR: ' + (err.stack || err.message) + '\n';
+  try { fs.appendFileSync(logFile, line); } catch (e) {}
+  console.error('FATAL BOOT ERROR:', err);
+  process.exit(1);
 });
