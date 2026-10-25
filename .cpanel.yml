@@ -2,8 +2,8 @@
 deployment:
   tasks:
     - export NODE_ENV=production
-    - source /home/originev/nodevenv/repositories/origin-/20/bin/activate
-    - cd /home/originev/repositories/origin-
+    - source /home/originev/nodevenv/repositories/origin-fresh/20/bin/activate
+    - cd /home/originev/repositories/origin-fresh
     - npm install --omit=dev
     - npm run build
     - mkdir -p tmp

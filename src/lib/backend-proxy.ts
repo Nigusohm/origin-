@@ -29,17 +29,27 @@ export async function proxyToBackend(request: Request, backendPath: string) {
   const isGetOrHead = ['GET', 'HEAD'].includes(request.method);
   const reqBody = isGetOrHead ? undefined : Buffer.from(await request.arrayBuffer());
 
-  const res = await fetch(target, {
-    method: request.method,
-    headers,
-    body: reqBody,
-  });
+  try {
+    const res = await fetch(target, {
+      method: request.method,
+      headers,
+      body: reqBody,
+      // 30s timeout — covers Render free-tier cold starts (~15–25s wake time)
+      signal: AbortSignal.timeout(30_000),
+    });
 
-  const resBuffer = await res.arrayBuffer();
-  return new Response(resBuffer, {
-    status: res.status,
-    headers: {
-      'Content-Type': res.headers.get('Content-Type') ?? 'application/json',
-    },
-  });
+    const resBuffer = await res.arrayBuffer();
+    return new Response(resBuffer, {
+      status: res.status,
+      headers: {
+        'Content-Type': res.headers.get('Content-Type') ?? 'application/json',
+      },
+    });
+  } catch (err: any) {
+    console.error(`[backend-proxy] Failed to reach ${target}:`, err.message);
+    return new Response(
+      JSON.stringify({ error: 'Backend service unavailable. Please try again in a moment.', detail: err.message }),
+      { status: 503, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
 }

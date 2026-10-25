@@ -5,6 +5,16 @@ const { parse } = require('url');
 const path = require('path');
 const fs = require('fs');
 
+// ── Load .env BEFORE Next.js initialises ────────────────────────────────────
+// cPanel / Phusion Passenger does NOT auto-load .env files.
+// Without this, process.env.BACKEND_URL is undefined and every proxy
+// call falls back to http://localhost:4000 → connection refused → 500.
+try {
+  require('dotenv').config({ path: path.join(__dirname, '.env') });
+} catch (e) {
+  // dotenv may not be installed in some environments — fail silently
+}
+
 const __dir = __dirname;
 
 const logFile = path.join(__dir, 'debug.log');

@@ -10,7 +10,7 @@ coverage/
 node_modules/
 
 # Next.js
-.next/
+# .next/
 out/
 
 # Build
