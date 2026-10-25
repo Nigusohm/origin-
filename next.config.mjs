@@ -1,8 +1,7 @@
-import type { NextConfig } from 'next';
-import type { Configuration } from 'webpack';
 import path from 'path';
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
   typescript: {
     ignoreBuildErrors: true,
@@ -14,7 +13,7 @@ const nextConfig: NextConfig = {
     workerThreads: false,
     cpus: 1,
   },
-  webpack(config: Configuration) {
+  webpack(config) {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@': path.resolve(process.cwd(), 'src'),

@@ -23,14 +23,14 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "tailwindcss": "^3.4.19",
-    "zod": "^3.24.2"
-  },
-  "devDependencies": {
+    "typescript": "5.8.2",
     "@types/node": "^22.20.5",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
     "autoprefixer": "^10.5.4",
-    "postcss": "^8.5.3",
-    "typescript": "5.8.2"
+    "postcss": "^8.5.3"
   }
 }
