@@ -5,8 +5,8 @@ import { initialProducts } from '@/data/mockData';
 
 async function fetchProducts(): Promise<Product[]> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/products`, { cache: 'no-store' });
+    const baseUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/api/products`, { cache: 'no-store', signal: AbortSignal.timeout(10_000) });
     if (!res.ok) return initialProducts;
     const data = await res.json();
     return Array.isArray(data) ? data : initialProducts;

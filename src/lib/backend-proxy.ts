@@ -39,11 +39,21 @@ export async function proxyToBackend(request: Request, backendPath: string) {
     });
 
     const resBuffer = await res.arrayBuffer();
+
+    // Preserve all response headers (strip hop-by-hop headers that cause issues)
+    const responseHeaders = new Headers();
+    res.headers.forEach((val, key) => {
+      if (!['transfer-encoding', 'connection'].includes(key.toLowerCase())) {
+        responseHeaders.set(key, val);
+      }
+    });
+    if (!responseHeaders.has('content-type')) {
+      responseHeaders.set('content-type', 'application/json');
+    }
+
     return new Response(resBuffer, {
       status: res.status,
-      headers: {
-        'Content-Type': res.headers.get('Content-Type') ?? 'application/json',
-      },
+      headers: responseHeaders,
     });
   } catch (err: any) {
     console.error(`[backend-proxy] Failed to reach ${target}:`, err.message);

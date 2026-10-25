@@ -5,8 +5,8 @@ import { initialCaseStudies } from '@/data/mockData';
 
 async function fetchCaseStudies(): Promise<CaseStudy[]> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}/api/case-studies`, { cache: 'no-store' });
+    const baseUrl = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const res = await fetch(`${baseUrl}/api/case-studies`, { cache: 'no-store', signal: AbortSignal.timeout(10_000) });
     if (!res.ok) return initialCaseStudies;
     const data = await res.json();
     return Array.isArray(data) ? data : initialCaseStudies;
